@@ -1,0 +1,100 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "appName",
+    "applicationName",
+    "evnType",
+    "domain",
+    "details"
+  ],
+  "properties": {
+    "appName": {
+      "title": "应用名",
+      "description": "反向代理应用的名字,不能与现有的重复",
+      "type": "string"
+    },
+    "appId": {
+      "title": "应用Id",
+      "description": "反向代理应用的id(可选)",
+      "type": "string"
+    },
+    "domain": {
+      "title": "域名",
+      "type": "string",
+      "description": "域名",
+      "default": "XXXXqa.apps.saic-gm.com"
+    },
+    "applicationName": {
+      "title": "中间件名",
+      "description": "反向代理中间件应用的名字,不能与现有的重复(格式为\\\"^[a-z0-9]([-a-z0-9]*[a-z0-9])?$\\\")",
+      "type": "string"
+    },
+    "evnType": {
+      "type": "string",
+      "title": "环境定义",
+      "oneOf": [
+        { "value": "innerNet", "label": "内网服务" },
+        { "value": "outerNet", "label": "外网服务" }
+      ]
+    },
+    "protocol": {
+      "type": "string",
+      "title": "protocol",
+      "example": "protocol",
+      "enum": [
+        { "value": "HTTP", "label": "HTTP" },
+        { "value": "HTTPS", "label": "HTTPS" },
+        { "value": "TCP", "label": "TCP" },
+        { "value": "UDP", "label": "UDP" }
+      ]
+    },
+    "userComment": {
+      "title": "备注",
+      "type": "string",
+      "attrs": {
+        "type": "textarea",
+        "placeholder": "通过 attrs 来设置可能的组件类型"
+      }
+    },
+    "details": {
+      "type": "array",
+      "description": "应用服务信息",
+      "title": "应用服务信息",
+      "items": {
+        "type": "object",
+        "description": "应用服务信息",
+        "required": [
+          "serverIp",
+          "serverPort",
+          "serverContext",
+          "serverAppContext"
+        ],
+        "properties": {
+          "serverIp": {
+            "title": "IP",
+            "type": "string",
+            "description": "IP"
+          },
+          "serverPort": {
+            "title": "端口",
+            "type": "integer",
+            "description": "端口"
+          },
+          "serverContext": {
+            "title": "location",
+            "type": "string",
+            "description": "location(第一个默认根)*"
+          },
+          "serverAppContext": {
+            "title": "应用上下文",
+            "type": "string",
+            "description": "应用上下文",
+            "default": "/"
+          }
+        }
+      }
+    }
+  }
+}

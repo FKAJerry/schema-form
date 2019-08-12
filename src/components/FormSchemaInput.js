@@ -6,6 +6,7 @@ import FormSchemaInputArrayElement from './FormSchemaInputArrayElement'
 const unwrappingElements = [INPUT_TYPES.CHECKBOX, INPUT_TYPES.RADIO]
 
 export const INPUT_ADDED_EVENT = 'array-button-clicked'
+export const INPUT_REMOVE_EVENT = 'remove-button-clicked'
 
 export default {
   functional: true,
@@ -62,11 +63,34 @@ export default {
         }
       }
 
-      return createElement(components.$.fieldset.component, {
-        field,
-        newItemButton,
-        on: listeners
-      }, inputs)
+      const removeItemButton = {
+        props: {
+          disabled: field.maxItems > field.itemsNum
+        },
+        on: {
+          click (e) {
+            console.log('deleted', e)
+            if (field.itemsNum >= field.maxItems) {
+              field.itemsNum--
+
+              if (INPUT_REMOVE_EVENT in listeners) {
+                listeners[INPUT_REMOVE_EVENT](e)
+              }
+            }
+          }
+        }
+      }
+
+      return createElement(
+        components.$.fieldset.component,
+        {
+          field,
+          newItemButton,
+          removeItemButton,
+          on: listeners
+        },
+        inputs
+      )
     }
 
     return createElement(input.element.component, input.data, children)

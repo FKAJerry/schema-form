@@ -10,7 +10,8 @@ import {
 
 const defaultOptions = {
   labelWidth: '120px',
-  arrayButtonLabel: 'Add more item'
+  arrayButtonLabel: 'Add more item',
+  removeButtonLabel: 'delete'
 }
 
 const Form = {
@@ -70,18 +71,28 @@ const Element = component => ({
           },
           on: {
             ...listeners,
-            input (value) {
-              const target = nodes[0].elm
+            input (value, event) {
+              let target = nodes[0].elm
+
+              if (!target) {
+                target = event.target
+              }
 
               target.value = value
+              target.setAttribute('data-fs-index', data.attrs['data-fs-index'])
               props.value = value
 
               listeners.input({ target })
             },
-            change (value) {
-              const target = nodes[0].elm
+            change (value, event) {
+              let target = nodes[0].elm
+
+              if (!target) {
+                target = event.target
+              }
 
               target.value = value
+              target.setAttribute('data-fs-index', data.attrs['data-fs-index'])
               props.value = value
 
               listeners.change({ target })
@@ -115,10 +126,11 @@ const Checkbox = {
           label: data.fieldParent ? props.value : props.label
         },
         on: {
-          change (value, event = {}) {
-            if (!event.target) event.target = {}
+          change (value, event) {
+            if (event.target.checked) {
+              event.target.value = value
+            }
             event.target.checked = value
-            event.target.value = value
 
             listeners.change(event)
           }
@@ -144,14 +156,23 @@ const Checkbox = {
 
 const Radio = {
   functional: true,
-  render (h, { data, props }) {
+  render (h, { data, props, listeners }) {
     return h(
       DaoRadio,
       {
         props: {
           name: data.attrs.name,
           label: props.label,
-          value: props.value
+          value: props.checked && props.value
+        },
+        on: {
+          change (value, event) {
+            const target = {
+              value
+            }
+
+            listeners.input({ target })
+          }
         }
       },
       props.label
@@ -161,9 +182,7 @@ const Radio = {
 
 const DaoSelect = {
   functional: true,
-  render (h, { data, props, listeners, slots }) {
-    console.log(props)
-    // const field = data.field
+  render (h, { props, listeners, slots }) {
     return h(
       'dao-select',
       {
@@ -326,7 +345,13 @@ const FieldsetDefault = {
 const FieldsetInput = {
   functional: true,
   render (h, { data, listeners, slots }) {
-    const nodes = slots().default || []
+    let nodes = slots().default || []
+
+    console.log(nodes)
+
+    nodes = nodes.map(node =>
+      h('div', {}, [node, h(RemoveButton, data.removeItemButton)])
+    )
 
     nodes.push(h('div', [h(ArrayButton, data.newItemButton)]))
 
@@ -369,7 +394,7 @@ const ArrayButton = {
   functional: true,
   render (h, { listeners }) {
     return h(
-      'button',
+      'a',
       {
         on: listeners,
         attrs: {
@@ -377,6 +402,19 @@ const ArrayButton = {
         }
       },
       defaultOptions.arrayButtonLabel
+    )
+  }
+}
+
+const RemoveButton = {
+  functional: true,
+  render (h, { listeners }) {
+    return h(
+      'a',
+      {
+        on: listeners
+      },
+      defaultOptions.removeButtonLabel
     )
   }
 }
@@ -396,7 +434,7 @@ const Error = {
   }
 }
 
-const Text = Element('daoInput')
+const Text = Element('dao-input')
 const Textarea = Element(DaoTextarea)
 const Select = Element(DaoSelect)
 

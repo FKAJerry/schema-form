@@ -85,7 +85,7 @@ export default {
       const value = checked ? this.label : false;
       // 同步更新v-model值
       this.$emit('input', value);
-      this.$emit('change', value);
+      this.$emit('change', value, event);
     },
     updateModel() {
       this.currentValue = this.value === this.label;

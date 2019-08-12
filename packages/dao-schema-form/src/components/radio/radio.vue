@@ -78,7 +78,7 @@ export default {
       this.currentValue = checked
 
       this.$emit('input', this.label)
-      this.$emit('change', this.label)
+      this.$emit('change', this.label, event)
     },
     updateValue () {
       this.currentValue = this.value === this.label

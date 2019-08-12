@@ -67,6 +67,9 @@ export default {
       case INPUT_TYPES.SELECT:
         const items = [...field.items]
 
+        // TODO(jerry) dirty change!
+        input.data.props.value = value
+
         delete input.data.attrs.type
         delete input.data.attrs.value
 

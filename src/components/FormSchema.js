@@ -329,15 +329,17 @@ export default {
      */
     parseArrayValue (event) {
       if (event.field.attrs.type === 'checkbox') {
+        const attrsName = event.field.attrs.name
+
         if (event.target.checked) {
-          if (!this.data[event.field.attrs.name].includes(event.data)) {
-            this.data[event.field.attrs.name].push(event.data)
+          if (!this.data[attrsName].includes(event.data)) {
+            this.data[attrsName].push(event.data)
           }
         } else {
-          const index = this.data[event.field.attrs.name].indexOf(event.data)
+          const index = this.data[attrsName].indexOf(event.data)
 
           if (index > -1) {
-            this.data[event.field.attrs.name].splice(index, 1)
+            this.data[attrsName].splice(index, 1)
           }
         }
       } else {

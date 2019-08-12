@@ -1,5 +1,7 @@
 # schema-form
 
+Using `yarn` only
+
 ## Project setup
 ```
 yarn install
@@ -7,7 +9,7 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn run demo
 ```
 
 ### Compiles and minifies for production

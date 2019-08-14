@@ -37,7 +37,7 @@ export default {
     ArrayItem,
   },
 
-  props: ["form", "field", "model", "to"],
+  props: ['form', 'field', 'model', 'to'],
 
   computed: {
     items() {

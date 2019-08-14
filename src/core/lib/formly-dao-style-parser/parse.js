@@ -67,7 +67,11 @@ export function injectFormlyProperity(field) {
     if (field.items) {
       field.templateOptions.options = field.items;
     } else {
-      field.templateOptions.options = [{}]; // equal self;
+      field.templateOptions.options = [
+        {
+          label: attrs.name,
+        },
+      ]; // equal self;
     }
   }
 }
@@ -208,7 +212,15 @@ export function loadFields(schema, fields = [], name = null, model = null) {
       }
 
       properties.forEach(key => {
-        loadFields(schema.properties[key], fields, key, model[key] || null);
+        if (schema.properties[key].type === SCHEMA_TYPES.OBJECT && !name) {
+          const field = parseObject(schema.properties[key], key, model);
+          field.fields = [];
+          loadFields(schema.properties[key], field.fields, key, model[key] || null);
+          fields.push(field);
+        } else {
+          console.log(schema.properties[key].type, key, name);
+          loadFields(schema.properties[key], fields, key, model[key] || null);
+        }
       });
       break;
 
@@ -217,7 +229,6 @@ export function loadFields(schema, fields = [], name = null, model = null) {
       break;
 
     case SCHEMA_TYPES.ARRAY:
-      console.log(schema, name, model);
       fields.push(parseArray(schema, name, model));
       break;
 
@@ -450,6 +461,8 @@ export function parseObject(schema, name = null, model = null) {
   if (name) {
     field.attrs.name = name;
   }
+
+  field.attrs.type = schema.type;
 
   setCommonFields(schema, field, model);
 

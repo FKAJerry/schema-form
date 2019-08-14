@@ -38,14 +38,14 @@ export default {
     to: {
       type: Object,
       default: () => ({}),
-    }
+    },
   },
 
   methods: {
     removeItem() {
       this.$emit('remove', this.index);
-    }
-  }
+    },
+  },
 };
 </script>
 

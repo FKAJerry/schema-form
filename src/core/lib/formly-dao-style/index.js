@@ -2,6 +2,7 @@ import ArrayField from './fields/array';
 import Checkbox from './fields/checkbox';
 import Input from './fields/input';
 import Integer from './fields/integer';
+import ObjectField from './fields/object';
 import Radio from './fields/radio';
 import Select from './fields/select';
 import Switch from './fields/switch';
@@ -13,6 +14,7 @@ const Fields = {
   text: Input,
   integer: Integer,
   number: Integer,
+  object: ObjectField,
   radio: Radio,
   select: Select,
   switch: Switch,

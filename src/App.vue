@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <pre>{{ model }}</pre>
+    <textarea cols="30" rows="10" v-model="schema"></textarea>
     <formly-form ref="form" :form="form" :model="model" :fields="fields"></formly-form>
   </div>
 </template>
@@ -14,14 +14,36 @@ export default {
   name: "app",
 
   data() {
-    const fields = Parser.fromJSONSchema(UserSchema);
-    console.log(JSON.stringify(fields, null, 2));
-
     return {
+      schema: '',
       form: {},
       model: Model,
-      fields
+      fields: [],
     };
+  },
+
+  watch: {
+    schema: {
+      immediate: true,
+      handler(schema) {
+        let JSONSchema = UserSchema;
+        if (schema) {
+          try {
+            JSONSchema = JSON.parse(schema);
+          } catch (err) {
+            console.log('bug', err);
+          }
+        }
+
+        this.fields = Parser.fromJSONSchema(JSONSchema);
+      }
+    }
   }
 };
 </script>
+
+<style lang="scss">
+#app {
+  display: flex;
+}
+</style>

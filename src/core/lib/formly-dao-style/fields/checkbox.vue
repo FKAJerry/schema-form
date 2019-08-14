@@ -31,9 +31,5 @@ import baseField from './baseField';
 
 export default {
   mixins: [baseField],
-
-  created() {
-    console.log(this);
-  },
 };
 </script>

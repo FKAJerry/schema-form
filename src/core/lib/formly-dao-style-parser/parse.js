@@ -183,9 +183,12 @@ export function parseDefaultObjectValue(schema, fields, value) {
 export function loadFields(schema, fields = [], name = null, model = null) {
   switch (schema.type) {
     case SCHEMA_TYPES.OBJECT:
+      // setting required
       if (schema.required instanceof Array) {
         schema.required.forEach(field => {
-          schema.properties[field].required = true;
+          if (schema.properties[field]) {
+            schema.properties[field].required = true;
+          }
         });
       }
 
@@ -205,17 +208,7 @@ export function loadFields(schema, fields = [], name = null, model = null) {
       }
 
       properties.forEach(key => {
-        if (name) {
-          // not the root object;
-          const field = parseBoolean(schema.properties[key], key, model);
-          fields.push(field);
-
-          console.log('--> fields', name, field, fields);
-
-          loadFields(schema.properties[key], field.fields, key, model[key] || null);
-        } else {
-          loadFields(schema.properties[key], fields, key, model[key] || null);
-        }
+        loadFields(schema.properties[key], fields, key, model[key] || null);
       });
       break;
 
@@ -224,6 +217,7 @@ export function loadFields(schema, fields = [], name = null, model = null) {
       break;
 
     case SCHEMA_TYPES.ARRAY:
+      console.log(schema, name, model);
       fields.push(parseArray(schema, name, model));
       break;
 
@@ -360,7 +354,7 @@ export function arrayUnorderedValues(field) {
 }
 
 export function singleValue(field) {
-  const item = field.items.reverse().find(item => item.checked || item.selected);
+  const item = field.items.reverse().find(x => x.checked || x.selected);
 
   return item ? item.value : '';
 }
@@ -429,7 +423,6 @@ export function parseArray(schema, name = null, model = null) {
     field.attrs.type = schema.items ? schema.items.type : INPUT_TYPES.TEXT;
     field.fields = [];
     loadFields(schema.items, field.fields, name, {});
-    // field.attrs.type = schema.items && NUMBER_TYPES.includes(schema.items.type)
   } else if (field.attrs.type === INPUT_TYPES.SELECT) {
     field.attrs.multiple = field.schemaType === SCHEMA_TYPES.ARRAY;
     field.attrs.value = field.attrs.value || field.attrs.multiple ? [] : '';

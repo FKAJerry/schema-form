@@ -45,10 +45,6 @@ export default {
     },
   },
 
-  created() {
-    console.log(this.field, this.model, this.to, this.items);
-  },
-
   methods: {
     addItem() {
       this.items.push({});

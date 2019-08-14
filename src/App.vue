@@ -36,6 +36,7 @@ export default {
         }
 
         this.fields = Parser.fromJSONSchema(JSONSchema);
+        this.model = Parser.getInitialState(JSONSchema, this.fields);
       }
     }
   }

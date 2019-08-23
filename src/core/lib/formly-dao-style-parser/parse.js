@@ -1,6 +1,6 @@
 import { isScalar, assign } from './object';
 
-/* eslint-disable no-labels */
+/* eslint-disable no-labels, no-prototype-builtins, no-restricted-syntax, no-use-before-define */
 
 const ARRAY_KEYWORDS = ['anyOf', 'oneOf', 'enum'];
 
@@ -90,7 +90,7 @@ export function setCommonFields(schema, field, model = null) {
   field.label = schema.title || '';
   field.description = schema.description || '';
   field.attrs.id = field.attrs.id || genId(field.attrs.name);
-  field.attrs.required = schema.required || false;
+  field.attrs.required = schema.__required || false;
   field.attrs.disabled = schema.disabled || false;
 }
 
@@ -196,7 +196,7 @@ export function loadFields(schema, fields = [], name = null, model = null) {
       if (schema.required instanceof Array) {
         schema.required.forEach(field => {
           if (schema.properties[field]) {
-            schema.properties[field].required = true;
+            schema.properties[field].__required = true;
           }
         });
       }
@@ -395,8 +395,8 @@ export function parseArray(schema, name = null, model = null) {
   setCommonFields(schema, field, model);
 
   field.items = [];
-  field.minItems = parseInt(schema.minItems) || 1;
-  field.maxItems = parseInt(schema.maxItems) || 1000;
+  field.minItems = parseInt(schema.minItems, 10) || 1;
+  field.maxItems = parseInt(schema.maxItems, 10) || 1000;
 
   loop: for (const keyword of ARRAY_KEYWORDS) {
     if (schema.hasOwnProperty(keyword)) {
@@ -481,3 +481,5 @@ export function parseObject(schema, name = null, model = null) {
 
   return field;
 }
+
+/* eslint-enable no-labels, no-prototype-builtins, no-restricted-syntax, no-use-before-define */

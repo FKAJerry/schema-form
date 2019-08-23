@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     <textarea
-cols="30"
-rows="10"
-v-model="schema"></textarea>
+      cols="30"
+      rows="10"
+      v-model="schema">
+    </textarea>
     <formly-form
-ref="form"
-:form="form"
-:model="model"
-:fields="fields"></formly-form>
+      ref="form"
+      :form="form"
+      :model="model"
+      :fields="fields">
+      <button class="dao-btn" @click="validate">提交</button>
+    </formly-form>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
       form: {},
       model: Model,
       fields: [],
+      JSONSchema: {},
     };
   },
 
@@ -42,9 +46,21 @@ export default {
           }
         }
 
+        this.JSONSchema = Object.assign({}, JSONSchema);
+
         this.fields = Parser.fromJSONSchema(JSONSchema);
         this.model = Parser.getInitialState(JSONSchema, this.fields);
+
+        console.log(this.form, this.model);
       },
+    },
+  },
+
+  methods: {
+    validate() {
+      // model, schema
+      const errors = Parser.validateFormData({}, this.JSONSchema);
+      console.log(errors);
     },
   },
 };

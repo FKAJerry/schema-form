@@ -1,6 +1,5 @@
 import ArrayField from './fields/array';
 import Checkbox from './fields/checkbox';
-// import Input from './fields/input';
 import HTMLInput from './fields/HTMLInput';
 import Integer from './fields/integer';
 import ObjectField from './fields/object';
@@ -24,7 +23,6 @@ const Fields = {
   textarea: Textarea,
   email: input('email'),
   url: input('url'),
-  // password: Password,
 };
 
 const FormlyDaoStyle = {

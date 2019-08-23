@@ -1,5 +1,7 @@
 import { loadFields, parseDefaultObjectValue } from './parse';
 
+export { default as validateFormData } from './validate';
+
 export function fromJSONSchema(schema) {
   return loadFields(schema);
 }

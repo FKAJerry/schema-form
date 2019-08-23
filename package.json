@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ajv": "^6.10.2",
     "core-js": "^2.6.5",
     "dao-style-vue": "^1.0.9-rc11",
     "lodash": "^4.17.15",

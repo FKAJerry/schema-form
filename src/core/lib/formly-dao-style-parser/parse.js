@@ -81,7 +81,7 @@ export function setCommonFields(schema, field, model = null) {
     field.attrs.value = model;
   } else if (field.attrs.hasOwnProperty('value')) {
     field.attrs.value = field.attrs.value; // eslint-disable-line
-  } else {
+} else {
     field.attrs.value = schema.default;
   }
 
@@ -138,7 +138,7 @@ export function parseEventValue({ target, field, data }) {
 }
 
 export function parseDefaultObjectValue(schema, fields, value) {
-  const data = schema.type === SCHEMA_TYPES.OBJECT ? {} : [];
+  const data = schema.type === SCHEMA_TYPES.ARRAY ? [] : {};
 
   if (value) {
     assign(data, value);
@@ -161,6 +161,11 @@ export function parseDefaultObjectValue(schema, fields, value) {
       case SCHEMA_TYPES.BOOLEAN:
         target.checked = itemValue;
         data[name] = parseEventValue(eventInput);
+        break;
+
+      case SCHEMA_TYPES.OBJECT:
+        const objectData = parseEventValue(eventInput);
+        data[name] = parseDefaultObjectValue(schema.properties[name], field.fields, objectData);
         break;
 
       default:
@@ -218,7 +223,6 @@ export function loadFields(schema, fields = [], name = null, model = null) {
           loadFields(schema.properties[key], field.fields, key, model[key] || null);
           fields.push(field);
         } else {
-          console.log(schema.properties[key].type, key, name);
           loadFields(schema.properties[key], fields, key, model[key] || null);
         }
       });
@@ -301,6 +305,13 @@ export function parseString(schema, name = null, model = null) {
           field.attrs.type = INPUT_TYPES.URL;
         }
         break;
+      default:
+        if (!field.attrs.type) {
+          field.attrs.type = INPUT_TYPES.TEXT;
+          if (schema.format !== 'regex' && schema.format !== 'json-pointer') {
+            field.attrs.inputType = schema.format;
+          }
+        }
     }
   }
 

@@ -1,6 +1,7 @@
 import ArrayField from './fields/array';
 import Checkbox from './fields/checkbox';
-import Input from './fields/input';
+// import Input from './fields/input';
+import HTMLInput from './fields/HTMLInput';
 import Integer from './fields/integer';
 import ObjectField from './fields/object';
 import Radio from './fields/radio';
@@ -8,10 +9,12 @@ import Select from './fields/select';
 import Switch from './fields/switch';
 import Textarea from './fields/textarea';
 
+import input from './fields/input.js';
+
 const Fields = {
   array: ArrayField,
   checkbox: Checkbox,
-  text: Input,
+  text: HTMLInput,
   integer: Integer,
   number: Integer,
   object: ObjectField,
@@ -19,6 +22,8 @@ const Fields = {
   select: Select,
   switch: Switch,
   textarea: Textarea,
+  email: input('email'),
+  url: input('url'),
   // password: Password,
 };
 

@@ -1,30 +1,26 @@
 <template>
-  <dao-setting-section>
-    <dao-setting-item>
-      <template slot="label" v-if="to.label">
-        {{ to.label }}
-      </template>
-      <template slot="content">
-        <input
-          :type="inputType"
-          class="dao-control"
-          v-model="model[field.key]"
-          :placeholder="getAtts(to.atts, 'placeholder')"
-          :disabled="to.disabled"
-        />
-      </template>
-      <p slot="content-helper" v-if="to.description">
-        {{ to.description }}
-      </p>
-    </dao-setting-item>
-  </dao-setting-section>
+  <field-item :to="to">
+    <input
+      :type="inputType"
+      class="dao-control"
+      v-model="model[field.key]"
+      :placeholder="getAtts(to.atts, 'placeholder')"
+      :disabled="to.disabled"
+    />
+  </field-item>
 </template>
 
 <script>
 import baseField from './baseField';
+import FieldItem from '../components/field-item';
 
 export default {
+  components: {
+    FieldItem,
+  },
+
   mixins: [baseField],
+
 
   props: {
     type: {

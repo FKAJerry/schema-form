@@ -1,19 +1,17 @@
 {
   "name": "schema-form",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.0",
+  "main": "dist/schema-form.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --target lib --name schema-form src/core/lib/schema-form.vue",
+    "lint": "vue-cli-service lint",
+    "clean": "rm -rf ./dist"
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "core-js": "^2.6.5",
-    "dao-style-vue": "^1.0.9-rc11",
-    "lodash": "^4.17.15",
-    "vue": "^2.6.10",
-    "vue-formly": "^2.5.8"
+    "ajv-i18n": "^3.4.0",
+    "json-pointer": "^0.6.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -21,10 +19,20 @@
     "@vue/cli-service": "^3.10.0",
     "@vue/eslint-config-airbnb": "^4.0.1",
     "babel-eslint": "^10.0.1",
+    "dao-style-vue": "^1.0.9-rc11",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lodash": "^4.17.15",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "vue": "^2.6.10",
+    "vue-formly": "^2.5.8",
     "vue-template-compiler": "^2.6.10"
+  },
+  "peerDependencies": {
+    "dao-style-vue": "^1.0.9-rc11",
+    "lodash": "^4.17.15",
+    "vue": "^2.6.10",
+    "vue-formly": "^2.5.8"
   }
 }

@@ -81,7 +81,7 @@ export function setCommonFields(schema, field, model = null) {
     field.attrs.value = model;
   } else if (field.attrs.hasOwnProperty('value')) {
     field.attrs.value = field.attrs.value; // eslint-disable-line
-} else {
+  } else {
     field.attrs.value = schema.default;
   }
 

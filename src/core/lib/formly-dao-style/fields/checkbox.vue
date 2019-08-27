@@ -1,35 +1,30 @@
 <template>
-  <dao-setting-section>
-    <dao-setting-item>
-      <template slot="label" v-if="to.label">
-        {{ to.label }}
-      </template>
-      <template slot="content">
-        <div
-          class="dao-checkbox"
-          v-for="item in to.options"
-          :key="item.id">
-          <label>
-            <input
-              type="checkbox"
-              :value="item.value"
-              v-model="model[field.key]"
-            />
-            {{ item.label }}
-          </label>
-        </div>
-      </template>
-      <p class="helper-text" v-if="to.description">
-        {{ to.description }}
-      </p>
-    </dao-setting-item>
-  </dao-setting-section>
+  <field-item :to="to">
+    <div
+      class="dao-checkbox"
+      v-for="item in to.options"
+      :key="item.id">
+      <label>
+        <input
+          type="checkbox"
+          :value="item.value"
+          v-model="model[field.key]"
+        />
+        {{ item.label }}
+      </label>
+    </div>
+  </field-item>
 </template>
 
 <script>
 import baseField from './baseField';
+import FieldItem from '../components/field-item';
 
 export default {
+  components: {
+    FieldItem,
+  },
+
   mixins: [baseField],
 };
 </script>

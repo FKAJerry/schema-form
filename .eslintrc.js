@@ -52,17 +52,6 @@ module.exports = {
         math: 'always',
       },
     ],
-    // https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/max-attributes-per-line.md
-    'vue/max-attributes-per-line': [
-      2,
-      {
-        singleline: 2,
-        multiline: {
-          max: 1,
-          allowFirstLine: false,
-        },
-      },
-    ],
     camelcase: ['off'],
   },
   parserOptions: {

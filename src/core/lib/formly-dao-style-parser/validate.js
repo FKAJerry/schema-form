@@ -19,5 +19,5 @@ export default function validateFormData(formData, schema) {
     console.log(err);
   }
 
-  return ajv.errors;
+  return ajv;
 }

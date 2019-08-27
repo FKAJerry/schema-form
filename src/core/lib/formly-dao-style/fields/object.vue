@@ -1,21 +1,22 @@
 <template>
-  <dao-setting-section>
-    <dao-setting-item>
-      <template slot="label" v-if="to.label">{{ to.label }}</template>
-       <template slot="content">
-        <formly-form
-          class="formly-array-item"
-          :form="form"
-          :model="model[field.key]"
-          :fields="field.fields">
-        </formly-form>
-       </template>
-    </dao-setting-item>
-  </dao-setting-section>
+  <field-item :to="to">
+    <formly-form
+      class="formly-array-item"
+      :form="form"
+      :model="model[field.key]"
+      :fields="field.fields">
+    </formly-form>
+  </field-item>
 </template>
 
 <script>
+import FieldItem from '../components/field-item';
+
 export default {
+  components: {
+    FieldItem,
+  },
+
   name: 'Object',
 
   props: {

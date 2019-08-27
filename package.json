@@ -1,5 +1,5 @@
 {
-  "name": "schema-form",
+  "name": "@daox/schema-form",
   "version": "0.0.0",
   "main": "dist/schema-form.umd.min.js",
   "scripts": {

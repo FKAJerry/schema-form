@@ -67,10 +67,15 @@ export default {
 
   methods: {
     validate() {
-      const ajv = Parser.validateFormData(this.model, this.schema);
+      const model = this.pruneModel(this.model);
+
+      const ajv = Parser.validateFormData(model, this.schema);
       localize(ajv.errors); // mutable function
 
       if (!ajv.errors) {
+        this.errors = [];
+        this.errorsText = '';
+
         return true;
       }
 
@@ -81,6 +86,24 @@ export default {
 
     getErrorText(e) {
       return `${e.dataPath.slice(1)} ${e.message}`;
+    },
+
+    pruneModel(model) {
+      const modelString = JSON.stringify(model, (key, value) => {
+        if (typeof value === 'string' && value === '') {
+          return undefined;
+        }
+        return value;
+      });
+
+      let prunedModel = model;
+      try {
+        prunedModel = JSON.parse(modelString);
+      } catch (err) {
+        console.error(err);
+      }
+
+      return prunedModel;
     },
   },
 };

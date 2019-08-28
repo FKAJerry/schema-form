@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "ajv-i18n": "^3.4.0",
-    "json-pointer": "^0.6.0"
+    "ajv-i18n": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",

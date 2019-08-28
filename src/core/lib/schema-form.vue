@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import JSONPointer from 'json-pointer';
 import localize from 'ajv-i18n/localize/zh';
 import * as Parser from '@/core/lib/formly-dao-style-parser';
 
@@ -71,15 +70,18 @@ export default {
       const ajv = Parser.validateFormData(this.model, this.schema);
       localize(ajv.errors); // mutable function
 
+      if (!ajv.errors) {
+        return true;
+      }
+
       this.errors = ajv.errors.slice();
       this.errorsText = this.errors.map(this.getErrorText);
-
-      return Boolean(this.errors.length);
+      return !this.errors.length;
     },
 
     getErrorText(e) {
       return `${e.dataPath.slice(1)} ${e.message}`;
-    }
+    },
   },
 };
 </script>

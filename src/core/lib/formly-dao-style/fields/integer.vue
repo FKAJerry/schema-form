@@ -1,6 +1,5 @@
 <template>
   <field-item :to="to">
-    {{ model[field.key] }}
     <dao-input
       ref="integer"
       type="number"

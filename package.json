@@ -4,7 +4,7 @@
   "main": "dist/schema-form.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name schema-form src/core/lib/schema-form.vue",
+    "build": "vue-cli-service build --target lib --name schema-form src/core/lib/plugin.js",
     "lint": "vue-cli-service lint",
     "clean": "rm -rf ./dist"
   },

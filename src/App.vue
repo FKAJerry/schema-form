@@ -15,16 +15,10 @@
 </template>
 
 <script>
-import SchemaForm from './core/lib/schema-form';
-// import UserSchema from './assets/schema.json';
 import Model from './assets/model.json';
 
 export default {
   name: 'app',
-
-  components: {
-    SchemaForm,
-  },
 
   data() {
     return {

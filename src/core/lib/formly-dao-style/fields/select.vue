@@ -3,8 +3,8 @@
     <dao-select
       v-model="model[field.key]"
       :disabled="to.disabled"
-      placeholder="搜索主机"
-      no-data-text="没有符合条件的主机"
+      placeholder="请选择"
+      no-data-text="没有符合条件的数据"
       :append-to-body="false">
       <dao-option-group>
         <dao-option

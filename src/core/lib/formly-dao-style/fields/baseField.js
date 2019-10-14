@@ -1,4 +1,4 @@
-import { get as getValue } from 'lodash';
+import getValue from 'lodash.get';
 
 export default {
   props: ['form', 'field', 'model', 'to'],

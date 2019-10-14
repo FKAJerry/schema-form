@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { head } from 'lodash';
 import baseField from './baseField';
 import FieldItem from '../components/field-item';
 
@@ -34,7 +33,7 @@ export default {
     const model = this.getModel();
     if (model === undefined || model === null) {
       const { options = [] } = this.to;
-      const firstOption = head(options);
+      const firstOption = options[0] || {};
       this.onChange(firstOption.value);
       this.setModel(firstOption.value);
     }

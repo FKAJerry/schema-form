@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "ajv-i18n": "^3.4.0"
+    "ajv-i18n": "^3.4.0",
+    "lodash.get": "^4.4.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -30,7 +31,6 @@
   },
   "peerDependencies": {
     "dao-style-vue": "^1.0.9-rc11",
-    "lodash": "^4.17.15",
     "vue": "^2.6.10",
     "vue-formly": "^2.5.8"
   }

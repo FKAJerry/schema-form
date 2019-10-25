@@ -1,6 +1,7 @@
 <template>
   <field-item :to="to">
     <formly-form
+      tag="div"
       class="formly-array-item"
       :form="form"
       :model="model[field.key]"

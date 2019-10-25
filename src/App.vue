@@ -60,7 +60,9 @@ export default {
 #app {
   display: flex;
 }
-
+textarea {
+  min-width: 800px;
+}
 .text-danger {
   color: red;
 }

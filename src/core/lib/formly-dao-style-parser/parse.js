@@ -447,7 +447,7 @@ export function parseArray(schema, name = null, model = null) {
     loadFields(schema.items, field.fields, name, {});
   } else if (field.attrs.type === INPUT_TYPES.SELECT) {
     field.attrs.multiple = field.schemaType === SCHEMA_TYPES.ARRAY;
-    field.attrs.value = field.attrs.value || field.attrs.multiple ? [] : '';
+    field.attrs.value = field.attrs.value || (field.attrs.multiple ? [] : '');
 
     if (field.attrs.value === undefined || field.attrs.value.length === 0) {
       if (field.attrs.multiple) {

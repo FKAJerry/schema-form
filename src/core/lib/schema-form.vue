@@ -7,6 +7,7 @@
     </ul>
     <formly-form
       ref="form"
+      tag="div"
       :form="form"
       :model="model"
       :fields="fields"

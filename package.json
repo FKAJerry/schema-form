@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name schema-form src/core/lib/plugin.js",
     "lint": "vue-cli-service lint",
+    "test": "echo 1",
     "clean": "rm -rf ./dist"
   },
   "dependencies": {

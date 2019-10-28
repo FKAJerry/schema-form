@@ -25,16 +25,17 @@ export default {
   },
 
   computed: {
-    label() {
-      return this.to.label;
+    miniCheckbox() {
+      return this.to.type === 'checkbox' && this.to.description === this.to.label;
     },
-
+    label() {
+      return this.miniCheckbox ? '' : this.to.label;
+    },
     required() {
       return this.to.required;
     },
-
     description() {
-      return this.to.description;
+      return this.miniCheckbox ? '' : this.to.description;
     },
   },
 };

@@ -1,6 +1,7 @@
 <template>
   <formly-form
     class="formly-array-item"
+    tag="div"
     :form="form"
     :model="model"
     :fields="field">
@@ -52,6 +53,9 @@ export default {
 <style lang="scss">
 .formly-array-item {
   position: relative;
+  display: flex;
+  max-width: 1000px;
+  flex-wrap: wrap;
 
   .formly-array-btn {
     display: none;

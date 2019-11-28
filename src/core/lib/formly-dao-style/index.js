@@ -7,6 +7,7 @@ import Radio from './fields/radio';
 import Select from './fields/select';
 import Switch from './fields/switch';
 import Textarea from './fields/textarea';
+import Password from './fields/password';
 
 import input from './fields/input.js';
 
@@ -21,6 +22,7 @@ const Fields = {
   select: Select,
   switch: Switch,
   textarea: Textarea,
+  password: Password,
   email: input('email'),
   url: input('url'),
 };

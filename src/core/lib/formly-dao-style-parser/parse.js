@@ -24,6 +24,7 @@ export const INPUT_TYPES = Object.freeze({
   TEXT: 'text',
   TEXTAREA: 'textarea',
   URL: 'url',
+  PASSWORD: 'password'
 });
 
 export const NUMBER_TYPES = Object.freeze([SCHEMA_TYPES.INTEGER, SCHEMA_TYPES.NUMBER]);
@@ -303,6 +304,11 @@ export function parseString(schema, name = null, model = null) {
       case 'uri':
         if (!field.attrs.type) {
           field.attrs.type = INPUT_TYPES.URL;
+        }
+        break;
+      case 'password':
+        if (!field.attrs.type) {
+          field.attrs.type = INPUT_TYPES.PASSWORD;
         }
         break;
       default:

@@ -1225,7 +1225,7 @@ address@^1.0.3:
   resolved "https://registry.npm.taobao.org/address/download/address-1.1.0.tgz#ef8e047847fcd2c5b6f50c16965f924fd99fe709"
   integrity sha1-744EeEf80sW29QwWll+ST9mf5wk=
 
-ajv-errors@^1.0.0:
+ajv-errors@^1.0.0, ajv-errors@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/ajv-errors/download/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"
   integrity sha1-81mGrOuRr63sQQL72FAUlQzvpk0=
@@ -5066,13 +5066,6 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
-
-lodash-webpack-plugin@^0.11.5:
-  version "0.11.5"
-  resolved "https://registry.yarnpkg.com/lodash-webpack-plugin/-/lodash-webpack-plugin-0.11.5.tgz#c4bd064b4f561c3f823fa5982bdeb12c475390b9"
-  integrity sha512-QWfEIYxpixOdbd6KBe5g6MDWcyTgP3trDXwKHFqTlXrWiLcs/67fGQ0IWeRyhWlTITQIgMpJAYd2oeIztuV5VA==
-  dependencies:
-    lodash "^4.17.4"
 
 lodash.defaultsdeep@^4.6.1:
   version "4.6.1"

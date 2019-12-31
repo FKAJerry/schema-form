@@ -1,4 +1,5 @@
 import Ajv from 'ajv';
+import ajvErrors from 'ajv-errors';
 
 function createAjvInstance() {
   return new Ajv({
@@ -12,7 +13,7 @@ function createAjvInstance() {
 
 export default function validateFormData(formData, schema) {
   const ajv = createAjvInstance();
-
+  ajvErrors(ajv);
   try {
     ajv.validate(schema, formData);
   } catch (err) {
